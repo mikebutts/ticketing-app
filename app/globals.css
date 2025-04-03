@@ -1,26 +1,118 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --nav: #18222f;
+  --page: #2b3441;
+  --card: #47566a;
+  --card-hover: #4f5e74;
+  --default-text: #f1f3f5;
+  --blue-accent: #0084d4;
+  --blue-accent-hover: #009fff;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.bg-page {
+  background-color: var(--page);
+}
+.bg-nav{
+  background-color:var(--nav);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.default-text{
+  color: var(--default-text)
+}
+.card{
+  background-color: #47566a;
+}
+.card:hover{
+  background-color: var(--card-hover);
 }
 
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 2.25rem; /* Equivalent to text-4xl */
+  margin: 0 0 5px 0;
+}
+
+h2 {
+  font-size: 1.875rem; /* Equivalent to text-3xl */
+}
+
+h3 {
+  font-size: 1.5rem; /* Equivalent to text-2xl */
+}
+
+h4 {
+  font-size: 1.25rem; /* Equivalent to text-xl */
+}
+
+h5 {
+  font-size: 1.125rem; /* Equivalent to text-lg */
+}
+
+p {
+  font-size: 0.875rem; /* Equivalent to text-sm */
+}
+
+form {
+  border-radius: 0.75rem; /* Equivalent to rounded-xl */
+  padding: 1rem; /* Equivalent to p-4 */
+}
+
+label {
+  margin-top: 1rem; /* Equivalent to mt-4 */
+}
+
+input,
+select,
+textarea {
+  margin: 0.25rem; /* Equivalent to m-1 */
+  border-radius: 0.25rem; /* Equivalent to rounded */
+  background-color: var(--card); /* Assuming you have --card defined */
+  padding: 0.25rem; /* Equivalent to p-1 */
+}
+
+.icon {
+  color: var(--default-text); /* Assuming you have --default-text defined */
+  font-size: 1.25rem; /* Equivalent to text-xl */
+}
+
+.btn {
+  text-decoration: none; /* Equivalent to hover:no-underline */
+  background-color: #3b82f6; /* Equivalent to bg-blue-accent - you might need to adjust this based on your theme */
+  letter-spacing: 0.025em; /* Approximation of tracking-wider */
+  width: 100%;
+  text-align: center;
+  color: var(--nav); /* Assuming you have --nav defined */
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  padding-left: 1rem; /* Equivalent to px-4 */
+  padding-right: 1rem; /* Equivalent to px-4 */
+  padding-top: 0.5rem; /* Equivalent to py-2 */
+  padding-bottom: 0.5rem; /* Equivalent to py-2 */
+  border-radius: 0.375rem; /* Equivalent to rounded-md */
+  transition-property: background-color; /* For hover effect */
+  transition-duration: 0.15s; /* Default transition duration */
+  transition-timing-function: ease-in-out; /* Default transition timing */
+  display: block;
+}
+
+.btn:hover {
+  background-color: #2563eb; /* Equivalent to hover:bg-blue-accent-hover - you might need to adjust this */
 }
