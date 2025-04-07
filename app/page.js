@@ -1,19 +1,28 @@
 import React from "react";
 import TicketCard from "./(components)/TicketCard";
+import { headers } from "next/headers";
+import Link from "next/link";
+
 
 const getTickets = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/Tickets", {
-      cache: "no-store",
+    const headersList = headers();
+    const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
+    const host = headersList.get('host');
+    const baseUrl = `${protocol}://${host}`;
+
+    const res = await fetch(`${baseUrl}/api/tickets`, {
+      cache: 'no-store',
     });
 
     if (!res.ok) {
-      throw new Error("Failed to fetch topics");
+      throw new Error('Failed to fetch tickets');
     }
 
-    return res.json();
+    return await res.json();
   } catch (error) {
-    console.log("Error loading topics: ", error);
+    console.error('Error loading tickets:', error);
+    return { tickets: [] };
   }
 };
 
@@ -47,7 +56,6 @@ const Dashboard = async() => {
               </div>
           ))}
         </div>
-          <TicketCard />
       </div>
     </>
 
