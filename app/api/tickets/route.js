@@ -17,14 +17,21 @@ export async function GET() {
 
 // POST /api/tickets
 export async function POST(req) {
-  await connectDB();
+    await connectDB();
 
-  try {
-    const body = await req.json();
-    const newTicket = await Ticket.create(body);
+    try {
+      const { title, description, priority, progress, status, category } = await req.json();
+      const newTicket = await Ticket.create({
+        title,
+        description,
+        priority,
+        progress,
+        status,
+        category,
+      });
 
-    return NextResponse.json({ message: "Ticket created", ticket: newTicket }, { status: 201 });
-  } catch (err) {
-    return NextResponse.json({ message: "Error creating ticket", error: err }, { status: 500 });
+      return NextResponse.json({ message: "Ticket created", ticket: newTicket }, { status: 201 });
+    } catch (err) {
+      return NextResponse.json({ message: "Error creating ticket", error: err.message }, { status: 500 });
+    }
   }
-}

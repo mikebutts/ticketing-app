@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-const EditTicketForm = ({ ticket }) => {
+const EditTicketForm = ({ ticket = {}}) => {
   const EDITMODE = ticket._id === "new" ? false : true;
   const router = useRouter();
   const startingTicketData = {
@@ -38,23 +38,24 @@ const EditTicketForm = ({ ticket }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
     if (EDITMODE) {
-      const res = await fetch(`/api/Tickets/${ticket._id}`, {
+      const res = await fetch(`/api/tickets/${ticket._id}`, {
         method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ formData }),
+        headers,
+        body: JSON.stringify(formData),
       });
       if (!res.ok) {
         throw new Error("Failed to update ticket");
       }
     } else {
-      const res = await fetch("/api/Tickets", {
+      const res = await fetch("/api/tickets", {
         method: "POST",
-        body: JSON.stringify({ formData }),
-        //@ts-ignore
-        "Content-Type": "application/json",
+        headers,
+        body: JSON.stringify(formData),
       });
       if (!res.ok) {
         throw new Error("Failed to create ticket");
@@ -64,6 +65,7 @@ const EditTicketForm = ({ ticket }) => {
     router.refresh();
     router.push("/");
   };
+
 
   const categories = [
     "Hardware Problem",
@@ -171,9 +173,9 @@ const EditTicketForm = ({ ticket }) => {
         />
         <label>Status</label>
         <select name="status" value={formData.status} onChange={handleChange}>
-          <option value="not started">Not Started</option>
-          <option value="started">Started</option>
-          <option value="done">Done</option>
+          <option value="open">Not Started</option>
+          <option value="in progress">Started</option>
+          <option value="complete">Done</option>
         </select>
         <input
           type="submit"
