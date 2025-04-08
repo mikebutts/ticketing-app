@@ -17,8 +17,7 @@ export async function GET(req, context) {
   
       const body = await req.json();
       const ticketData = body.formData;
-        console.log(body)
-        console.log(ticketData)
+
       await connectDB();
     
       const updatedTicket = await Ticket.findByIdAndUpdate(id, body, { new: true });
@@ -34,7 +33,7 @@ export async function GET(req, context) {
   export async function DELETE(req, context) {
     try {
       const { id } = await context.params; // Await params before destructuring
-  
+        console.log(id)
       await connectDB();
       await Ticket.findByIdAndDelete(id);
   

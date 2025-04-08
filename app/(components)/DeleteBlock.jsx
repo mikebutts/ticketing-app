@@ -8,13 +8,16 @@ const DeleteBlock = ({ id }) => {
   const router = useRouter();
 
   const deleteTicket = async () => {
-    const res = await fetch(`http://localhost:3000/api/Tickets/${id}`, {
-      method: "DELETE",
+    const res = await fetch(`/api/tickets/${id}`, {
+      method: 'DELETE',
     });
     if (res.ok) {
       router.refresh();
+    } else {
+      console.error('Failed to delete the ticket');
     }
   };
+  
 
   return (
     <FontAwesomeIcon
