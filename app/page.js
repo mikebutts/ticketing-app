@@ -5,7 +5,7 @@ import { headers } from "next/headers";
 
 const getTickets = async () => {
   try {
-    const headersList = headers();
+    const headersList = await headers();
     const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
     const host = headersList.get('host');
     const baseUrl = `${protocol}://${host}`;

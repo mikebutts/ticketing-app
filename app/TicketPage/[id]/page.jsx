@@ -9,19 +9,24 @@ const getTicketById = async (id) => {
     if (!res.ok) {
       throw new Error("Failed to fetch topic");
     }
-
+    
     return res.json();
   } catch (error) {
     console.log(error);
   }
 };
 
-let updateTicketData = {};
+
 const TicketPage = async ({ params }) => {
-  const EDITMODE = params.id === "new" ? false : true;
+  const {id} = await params;
+  const EDITMODE = id === "new" ? false : true;
+
+  let updateTicketData = {}
 
   if (EDITMODE) {
-    updateTicketData = await getTicketById(params.id);
+    
+    updateTicketData = await getTicketById(id);
+
     updateTicketData = updateTicketData.foundTicket;
   } else {
     updateTicketData = {

@@ -37,34 +37,29 @@ const EditTicketForm = ({ ticket = {}}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const headers = {
       "Content-Type": "application/json",
     };
-
+  
     if (EDITMODE) {
       const res = await fetch(`/api/tickets/${ticket._id}`, {
         method: "PUT",
         headers,
         body: JSON.stringify(formData),
       });
+  
       if (!res.ok) {
         throw new Error("Failed to update ticket");
       }
     } else {
-      const res = await fetch("/api/tickets", {
-        method: "POST",
-        headers,
-        body: JSON.stringify(formData),
-      });
-      if (!res.ok) {
-        throw new Error("Failed to create ticket");
-      }
+      // Handle ticket creation
     }
-
+  
     router.refresh();
     router.push("/");
   };
+  
 
 
   const categories = [
