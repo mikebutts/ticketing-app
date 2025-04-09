@@ -7,17 +7,17 @@ import { useRouter } from "next/navigation";
 const DeleteBlock = ({ id }) => {
   const router = useRouter();
 
-  const deleteTicket = async () => {
-    const res = await fetch(`/api/tickets/${id}`, {
-      method: 'DELETE',
-    });
-    if (res.ok) {
-      router.refresh();
-    } else {
-      console.error('Failed to delete the ticket');
-    }
-  };
-  
+const deleteTicket = async () => {
+  const res = await fetch(`/api/tickets/${id}`, {
+    method: 'DELETE',
+  });
+  if (res.ok) {
+    router.refresh();
+  } else {
+    console.error('Failed to delete the ticket');
+  }
+};
+
 
   return (
     <FontAwesomeIcon
